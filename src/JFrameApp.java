@@ -8,6 +8,7 @@ public class JFrameApp extends JFrame
         setTitle("Calculator");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         add( new JPanelApp());
+        pack();
         setResizable(false);
         setVisible(true);
     }
