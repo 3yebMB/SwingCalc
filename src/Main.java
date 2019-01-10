@@ -5,4 +5,3 @@ public class Main {
         sc.setResizable(false);
     }
 }
-// setResizable(false);

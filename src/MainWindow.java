@@ -1,22 +1,26 @@
 import javax.swing.*;
+import java.awt.*;
 
+/*
+ *  Класс создания окна и элементов
+ */
 public class MainWindow extends JFrame {
     private JLabel jLabel;
     private JTextField jTextField;
     private JButton jButton;
 
 
-    public  MainWindow(){
+    public  MainWindow() throws HeadlessException {
         super("Swing Calculator");
         this.setSize(300, 200);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.getContentPane().setLayout(null);
-        this.add(getJLabel(), null);
-        this.add(getJTextField(), null);
-        this.add(getJButton(), null);
-        //this.setTitle("HelloWorld");
+//        this.add(getJLabel(), null);
+//        this.add(getJTextField(), null);
+//        this.add(getJButton(), null);
     }
 
-    private javax.swing.JLabel getJLabel() {
+    private JLabel getJLabel() {
         if(jLabel == null) {
             jLabel = new javax.swing.JLabel();
             jLabel.setBounds(34, 49, 53, 18);
@@ -25,7 +29,7 @@ public class MainWindow extends JFrame {
         return jLabel;
     }
 
-    private javax.swing.JTextField getJTextField() {
+    private JTextField getJTextField() {
         if(jTextField == null) {
             jTextField = new javax.swing.JTextField();
             jTextField.setBounds(96, 49, 160, 20);
@@ -33,7 +37,7 @@ public class MainWindow extends JFrame {
         return jTextField;
     }
 
-    private javax.swing.JButton getJButton() {
+    private JButton getJButton() {
         if(jButton == null) {
             jButton = new javax.swing.JButton();
             jButton.setBounds(103, 110, 71, 27);
