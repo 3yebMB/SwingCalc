@@ -10,6 +10,7 @@ public class JPanelApp<operand> extends JPanel
     String oper1 = "";
     String oper2 = "";
     String sign = "";
+    Caclculus calc = new Caclculus();
 
     final String[] cap = {"C", "n!", "y^x", "<=", "7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "+", "0", ".", "=", "-"};
     int BUTTONS = 20;
@@ -18,8 +19,6 @@ public class JPanelApp<operand> extends JPanel
 
     public JPanelApp()
     {
-
-
         JPanel btnPanel = new JPanel();
         GridLayout layout = new GridLayout(5, 4, 2, 2);
         btnPanel.setLayout(layout);
@@ -39,7 +38,10 @@ public class JPanelApp<operand> extends JPanel
                 // далее говно-код....
                     switch (e.getActionCommand()){
                         case "=" :
-                            txt1.setText(new Caclculus().getResult(oper1, oper2, sign));
+                            if (sign.equals("^"))
+                                txt1.setText(calc.getDegree(oper1, oper2));
+                            else
+                                txt1.setText(calc.getResult(oper1, oper2, sign));
                             oper1 = "";
                             oper2 = "";
                             sign = "";
@@ -48,22 +50,25 @@ public class JPanelApp<operand> extends JPanel
                         case "*" :
                         case "+" :
                         case "-" :
-                            if (sign.equals("")){
-                                oper1 = txt1.getText();
-                                sign = e.getActionCommand();
-                            }
-                            else {
-                                if (oper2.equals("")){
+                            if (!sign.equals("^")) {
+                                if (sign.equals("")) {
+                                    oper1 = txt1.getText();
                                     sign = e.getActionCommand();
+                                    txt1.setText(oper1 + sign);
+                                } else {
+                                    if (!oper2.equals("")) {
+                                        //sign = e.getActionCommand(); считаем со старым знаком
+                                        // результат выводим и новый знак
+                                        oper1 = calc.getResult(oper1, oper2, sign);
+                                        oper2 = "";
+                                        sign = e.getActionCommand();
+                                        txt1.setText(oper1 + sign);
+                                    }
                                 }
-                                else{
-                                    oper1 = new Caclculus().getResult(oper1, oper2, sign);
-                                    sign = e.getActionCommand();
-                                    oper2 = "";
-                                }
-                            }
 
+                            sign = e.getActionCommand();
                             txt1.setText(oper1 + e.getActionCommand());
+                            }
                             break;
                         case "0" :
                         case "1" :
@@ -76,12 +81,13 @@ public class JPanelApp<operand> extends JPanel
                         case "8" :
                         case "9" :
                             if (sign.equals("")) {
-                                oper1 += oper1 + e.getActionCommand();
-                                txt1.setText(oper1 + e.getActionCommand());
+                                oper1 += e.getActionCommand();
+                                txt1.setText(oper1);
                             }
                             else {
-                                oper2 += oper2 + e.getActionCommand();
-                                txt1.setText(txt1.getText() + e.getActionCommand());
+                                oper2 += e.getActionCommand();
+                                if (!sign.equals("y^x"))
+                                    txt1.setText(oper1 + sign + oper2);
                             }
                             break;
                         case "C" :
@@ -96,7 +102,10 @@ public class JPanelApp<operand> extends JPanel
 
                             break;
                         case "y^x" :
-                            // реализовать
+                            sign = "^";
+                            if (oper1.equals(""))
+                                oper1 = "0";
+                            txt1.setText(oper1 + sign);
                             break;
                     }
                 }

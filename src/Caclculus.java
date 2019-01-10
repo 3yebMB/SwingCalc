@@ -4,6 +4,13 @@ public class Caclculus {
     //private double x = 0;
     //private double y = 0;
     //private String oper = "";
+    public String getDegree (String x, String y){
+        double tmp = Double.parseDouble(x);
+        int exp = Integer.parseInt(y);
+        for (int i=1; i<exp; i++)
+            tmp += tmp;
+        return Double.toString(tmp);
+    }
 
     public String getResult(String x, String y, String o) {
         switch (o){
