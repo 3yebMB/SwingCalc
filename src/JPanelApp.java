@@ -41,7 +41,31 @@ public class JPanelApp<operand> extends JPanel
 
             @Override
             public void keyReleased(KeyEvent e) {
-                if (e.getKeyChar()==10) {
+                if (e.getKeyCode()==27) {
+                    oper1 = "";
+                    oper2 = "";
+                    sign = "";
+                    txt1.setText("0");
+                }
+                if ((e.getKeyChar()==127) || (e.getKeyChar()==8)){
+                    if (oper2.equals("")) {
+                        if (sign.equals("")) {
+                            if (oper1.equals("")) {
+                                ;
+                            } else {
+                                oper1=oper1.substring(0, oper1.length()-1);
+                            }
+                        } else {
+                            sign = "";
+                        }
+                        txt1.setText(oper1);
+                    }
+                    else{
+                        oper2 = oper2.substring(0, oper2.length()-1);
+                        txt1.setText(oper1+sign+oper2);
+                    }
+                }
+                else if (e.getKeyChar()==10) {
                     if (sign.equals("^"))
                         txt1.setText(calc.getDegree(oper1, oper2));
                     else
@@ -160,6 +184,23 @@ public class JPanelApp<operand> extends JPanel
                             txt1.setText("0");
                             break;
                         case "<=" :
+                            if (oper2.equals("")) {
+                                if (sign.equals("")) {
+                                    if (oper1.equals("")) {
+                                        ;
+                                    } else {
+                                        oper1=oper1.substring(0, oper1.length()-1);
+                                    }
+                                } else {
+                                    sign = "";
+                                }
+                                txt1.setText(oper1);
+                            }
+                            else{
+                                oper2 = oper2.substring(0, oper2.length()-1);
+                                txt1.setText(oper1+sign+oper2);
+                                }
+
                             break;
                         case "n!" :
                             if ((!oper1.equals("")) && (sign.equals("")))
