@@ -35,7 +35,7 @@ public class JPanelApp<operand> extends JPanel
             btns[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                // далее говно-код....
+                // код тут так себе, торопился (-:
                     switch (e.getActionCommand()){
                         case "=" :
                             if (sign.equals("^"))
@@ -99,7 +99,11 @@ public class JPanelApp<operand> extends JPanel
                         case "<=" :
                             break;
                         case "n!" :
-
+                            if ((!oper1.equals("")) && (sign.equals("")))
+                                txt1.setText(Integer.toString(calc.getFact(Integer.parseInt(oper1))));
+                            oper1 = "";
+                            oper2 = "";
+                            sign = "";
                             break;
                         case "y^x" :
                             sign = "^";

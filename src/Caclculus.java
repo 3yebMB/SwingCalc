@@ -4,6 +4,16 @@ public class Caclculus {
     //private double x = 0;
     //private double y = 0;
     //private String oper = "";
+
+    public int getFact(int x){
+        int res = 1;
+        if (x==0)
+            return 1;
+        else {
+            return getFact(x-1)*x;
+        }
+    }
+
     public String getDegree (String x, String y){
         double tmp = Double.parseDouble(x);
         int exp = Integer.parseInt(y);
