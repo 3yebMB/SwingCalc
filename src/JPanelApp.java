@@ -66,10 +66,18 @@ public class JPanelApp<operand> extends JPanel
                     }
                 }
                 else if (e.getKeyChar()==10) {
-                    if (sign.equals("^"))
+                    if (sign.equals("^")) {
                         txt1.setText(calc.getDegree(oper1, oper2));
-                    else
+                        oper1 = "";
+                        oper2 = "";
+                        sign = "";
+                    }
+                    else {
                         txt1.setText(calc.getResult(oper1, oper2, sign));
+                        oper1 = "";
+                        oper2 = "";
+                        sign = "";
+                    }
                 }
                 if ((e.getKeyChar()==42) || (e.getKeyChar()== 43) ||
                    (e.getKeyChar()==45) || (e.getKeyChar()==47) || (e.getKeyChar()==94)) {
