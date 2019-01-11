@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class JPanelApp<operand> extends JPanel
 {
     double result = 0;
-    String oper1 = "";
-    String oper2 = "";
+    String oper1 = ""; // convert to int
+    String oper2 = ""; // convert to int
     String sign = "";
     Caclculus calc = new Caclculus();
 

@@ -1,9 +1,6 @@
 public class Caclculus {
     private String result = "0";
     double tmp;
-    //private double x = 0;
-    //private double y = 0;
-    //private String oper = "";
 
     public int getFact(int x){
         int res = 1;
@@ -13,7 +10,7 @@ public class Caclculus {
             return getFact(x-1)*x;
         }
     }
-
+    // принимать на вход int
     public String getDegree (String x, String y){
         double tmp = Double.parseDouble(x);
         int exp = Integer.parseInt(y);
@@ -21,7 +18,7 @@ public class Caclculus {
             tmp += tmp;
         return Double.toString(tmp);
     }
-
+    // принимать на вход int
     public String getResult(String x, String y, String o) {
         switch (o){
             case "/" :
