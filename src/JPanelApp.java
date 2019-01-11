@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class JPanelApp<operand> extends JPanel
@@ -12,7 +10,6 @@ public class JPanelApp<operand> extends JPanel
     String oper1 = "";
     String oper2 = "";
     String sign = "";
-    Caclculus calc = new Caclculus();
 
     final String[] cap = {"C", "n!", "y^x", "<=", "7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "+", "0", ".", "=", "-"};
     int BUTTONS = 20;
@@ -28,98 +25,6 @@ public class JPanelApp<operand> extends JPanel
         setLayout(new BorderLayout());
 
         final TextField txt1 = new TextField();
-        txt1.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if (e.getKeyCode()==27) {
-                    oper1 = "";
-                    oper2 = "";
-                    sign = "";
-                    txt1.setText("0");
-                }
-                if ((e.getKeyChar()==127) || (e.getKeyChar()==8)){
-                    if (oper2.equals("")) {
-                        if (sign.equals("")) {
-                            if (oper1.equals("")) {
-                                ;
-                            } else {
-                                oper1=oper1.substring(0, oper1.length()-1);
-                            }
-                        } else {
-                            sign = "";
-                        }
-                        txt1.setText(oper1);
-                    }
-                    else{
-                        oper2 = oper2.substring(0, oper2.length()-1);
-                        txt1.setText(oper1+sign+oper2);
-                    }
-                }
-                else if (e.getKeyChar()==10) {
-                    if (sign.equals("^")) {
-                        txt1.setText(calc.getDegree(oper1, oper2));
-                        oper1 = "";
-                        oper2 = "";
-                        sign = "";
-                    }
-                    else {
-                        txt1.setText(calc.getResult(oper1, oper2, sign));
-                        oper1 = "";
-                        oper2 = "";
-                        sign = "";
-                    }
-                }
-                if ((e.getKeyChar()==42) || (e.getKeyChar()== 43) ||
-                   (e.getKeyChar()==45) || (e.getKeyChar()==47) || (e.getKeyChar()==94)) {
-                    if (!sign.equals("^")) {
-                        if (sign.equals("")) {
-                            oper1 = txt1.getText();
-                            sign = String.valueOf(e.getKeyChar());
-                            txt1.setText(oper1 + sign);
-                        } else {
-                            if (!oper2.equals("")) {
-                                oper1 = calc.getResult(oper1, oper2, sign);
-                                oper2 = "";
-                                sign = String.valueOf(e.getKeyChar());
-                                txt1.setText(oper1 + sign);
-                            }
-                        }
-
-                        sign = String.valueOf(e.getKeyChar());
-                        txt1.setText(oper1 + e.getKeyChar());
-                    }
-
-
-                }
-                else if (e.getKeyChar()==33) {
-                    if (oper1.equals(""))
-                        oper1 = "0";
-                    txt1.setText(Integer.toString(calc.getFact(Integer.parseInt(oper1))));
-                }
-                else if ((e.getKeyChar() >= 48) && (e.getKeyChar() <= 57)){
-                    if (sign.equals("")){
-                        oper1 += e.getKeyChar();
-                        txt1.setText(oper1);
-                    }
-                    else if (!sign.equals("^")){
-                        oper2 += e.getKeyChar();
-                        txt1.setText(oper1 + sign + oper2);
-                    }
-                }
-                txt1.requestFocus();
-            }
-        });
-
         txt1.setText("0");
         txt1.setBounds(10, 10, 200, 25);
         txt1.setEditable(false);
@@ -130,7 +35,7 @@ public class JPanelApp<operand> extends JPanel
             btns[i].addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                // РєРѕРґ С‚СѓС‚ С‚Р°Рє СЃРµР±Рµ, С‚РѕСЂРѕРїРёР»СЃСЏ (-:
+                // код тут так себе, торопился (-:
                     switch (e.getActionCommand()){
                         case "=" :
                             if (sign.equals("^"))
@@ -152,8 +57,8 @@ public class JPanelApp<operand> extends JPanel
                                     txt1.setText(oper1 + sign);
                                 } else {
                                     if (!oper2.equals("")) {
-                                        //sign = e.getActionCommand(); СЃС‡РёС‚Р°РµРј СЃРѕ СЃС‚Р°СЂС‹Рј Р·РЅР°РєРѕРј
-                                        // СЂРµР·СѓР»СЊС‚Р°С‚ РІС‹РІРѕРґРёРј Рё РЅРѕРІС‹Р№ Р·РЅР°Рє
+                                        //sign = e.getActionCommand(); считаем со старым знаком
+                                        // результат выводим и новый знак
                                         oper1 = calc.getResult(oper1, oper2, sign);
                                         oper2 = "";
                                         sign = e.getActionCommand();
