@@ -128,7 +128,7 @@ public class JPanelApp<operand> extends JPanel
             btns[i] = new JButton(cap[i]);
             btnPanel.add(btns[i]);
             btns[i].addActionListener(new ActionListener() {
-                @Override
+                @Override                   // Подсказка 2
                 public void actionPerformed(ActionEvent e) {
                 // код тут так себе, торопился (-:
                     switch (e.getActionCommand()){
